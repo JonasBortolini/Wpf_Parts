@@ -79,7 +79,6 @@ namespace WpfApp2.ViewModel
                 {
                     AllParts.RemoveAt(IndexPart);
                     AllParts.Insert(IndexPart, newPart);
-
                 }
                 Helper.Serialize(AllParts);
                 RefreshDataGrid();
@@ -88,10 +87,10 @@ namespace WpfApp2.ViewModel
             }
             else
             {
-                return MessageError(code, length, width);
+                return MessageError(code, width);
             }
         }
-        private int MessageError(string code, string length, string width)
+        private int MessageError(string code, string width)
         {
             if (ConvertToInt(code) <= 0)
             {
@@ -128,17 +127,17 @@ namespace WpfApp2.ViewModel
             }
         }
 
-        public void EditPiece(Part peca)
+        public void EditPiece(Part part)
         {
-            IndexPart = GetIndex(peca);
+            IndexPart = GetIndex(part);
         }
 
-        private int GetIndex(Part peca)
+        private int GetIndex(Part part)
         {
             int index = -1;
-            if (peca != null)
+            if (part != null)
             {
-                index = AllParts.IndexOf(peca);
+                index = AllParts.IndexOf(part);
             }
             return index;
         }
@@ -150,25 +149,25 @@ namespace WpfApp2.ViewModel
             RefreshDataGrid();
         }
 
-        private IEnumerable<Part> GetCode(List<Part> list, string search)
+        private IEnumerable<Part> GetCode(List<Part> listPart, string search)
         {
-            IEnumerable<Part> result = from item in list
-                                       where item.codePart == ConvertToInt(search)
-                                       select item;
+            IEnumerable<Part> result = from part in listPart
+                                       where part.codePart == ConvertToInt(search)
+                                       select part;
             return result;
         }
-        private IEnumerable<Part> GetDescription(List<Part> list, string search)
+        private IEnumerable<Part> GetDescription(List<Part> listPart, string search)
         {
-            IEnumerable<Part> result = from item in list
-                                       where item.descriptionPart.Contains(search)
-                                       select item;
+            IEnumerable<Part> result = from part in listPart
+                                       where part.descriptionPart.Contains(search)
+                                       select part;
             return result;
         }
-        private IEnumerable<Part> GetDimension(List<Part> list, string search)
+        private IEnumerable<Part> GetDimension(List<Part> listPart, string search)
         {
-            IEnumerable<Part> result = from item in list
-                                       where item.lengthPart == ConvertToDecimal(search) || item.widthPart == ConvertToDecimal(search)
-                                       select item;
+            IEnumerable<Part> result = from part in listPart
+                                       where part.lengthPart == ConvertToDecimal(search) || part.widthPart == ConvertToDecimal(search)
+                                       select part;
             return result;
         }
 
