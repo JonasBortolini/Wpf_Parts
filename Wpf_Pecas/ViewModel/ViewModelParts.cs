@@ -189,6 +189,10 @@ namespace WpfApp2.ViewModel
                         break;
                 }
             }
+            else 
+            {
+                RefreshDataGrid();
+            }
         }
 
         public void RefreshDataGridSearch(IEnumerable<Part> AllParts)
