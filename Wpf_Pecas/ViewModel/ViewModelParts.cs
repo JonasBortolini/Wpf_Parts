@@ -12,7 +12,7 @@ namespace WpfApp2.ViewModel
 {
     public class ViewModelParts
     {
-        public int index = -1;
+        public int IndexPart = -1;
 
         public List<Part> AllParts = new List<Part>();
         public ObservableCollection<Part> ObservableListParts { get; set; } = new ObservableCollection<Part>();
@@ -44,8 +44,8 @@ namespace WpfApp2.ViewModel
         public decimal ConvertToDecimal(string item)
         {
             decimal result = 0;
-            string item2 = item.Replace(".", ",");
-            if (decimal.TryParse(item2, out result) && result > 0)
+            item = item.Replace(".", ",");
+            if (decimal.TryParse(item, out result) && result > 0)
             {
                 return result;
             }
@@ -71,19 +71,19 @@ namespace WpfApp2.ViewModel
             {
                 Part newPart = NewPart(code, description, length, width);
 
-                if (index == -1)
+                if (IndexPart == -1)
                 {
                     AllParts.Add(newPart);
                 }
-                if (index > -1)
+                if (IndexPart > -1)
                 {
-                    AllParts.RemoveAt(index);
-                    AllParts.Insert(index, newPart);
+                    AllParts.RemoveAt(IndexPart);
+                    AllParts.Insert(IndexPart, newPart);
 
                 }
                 Helper.Serialize(AllParts);
                 RefreshDataGrid();
-                index = -1;
+                IndexPart = -1;
                 return 0;
             }
             else
@@ -130,7 +130,7 @@ namespace WpfApp2.ViewModel
 
         public void EditPiece(Part peca)
         {
-            index = GetIndex(peca);
+            IndexPart = GetIndex(peca);
         }
 
         private int GetIndex(Part peca)
@@ -146,7 +146,7 @@ namespace WpfApp2.ViewModel
         public void DeletePart(Part part)
         {
             AllParts.RemoveAt(GetIndex(part));
-            Helper.Serialize(AllParts.ToList());
+            Helper.Serialize(AllParts);
             RefreshDataGrid();
         }
 
