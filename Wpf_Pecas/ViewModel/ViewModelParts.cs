@@ -52,11 +52,11 @@ namespace WpfApp2.ViewModel
         public Part NewPart(string code, string description, string length, string width)
         {
             Part newPart = new Part();
-            newPart.codePart = ConvertToInt(code);
-            newPart.lengthPart = ConvertToDecimal(length);
-            newPart.widthPart = ConvertToDecimal(width);
-            newPart.descriptionPart = description;
-            newPart.dimensionPart = $"{newPart.lengthPart} X {newPart.widthPart}";
+            newPart.CodePart = ConvertToInt(code);
+            newPart.LengthPart = ConvertToDecimal(length);
+            newPart.WidthPart = ConvertToDecimal(width);
+            newPart.DescriptionPart = description;
+            newPart.DimensionPart = $"{newPart.LengthPart} X {newPart.WidthPart}";
             return newPart;
         }
         public int SavePart(string code, string description, string length, string width)
@@ -141,29 +141,29 @@ namespace WpfApp2.ViewModel
         private IEnumerable<Part> GetCode(List<Part> listPart, string search)
         {
             IEnumerable<Part> result = from part in listPart
-                                       where part.codePart == ConvertToInt(search)
+                                       where part.CodePart == ConvertToInt(search)
                                        select part;
             return result;
         }
         private IEnumerable<Part> GetDescription(List<Part> listPart, string search)
         {
             IEnumerable<Part> result = from part in listPart
-                                       where part.descriptionPart.Contains(search)
+                                       where part.DescriptionPart.Contains(search)
                                        select part;
             return result;
         }
         private IEnumerable<Part> GetDimension(List<Part> listPart, string search)
         {
             IEnumerable<Part> result = from part in listPart
-                                       where part.lengthPart == ConvertToDecimal(search) || part.widthPart == ConvertToDecimal(search)
+                                       where part.LengthPart == ConvertToDecimal(search) || part.WidthPart == ConvertToDecimal(search)
                                        select part;
             return result;
         }
-        public void SearchPart(int Index, string search)
+        public void SearchPart(int index, string search)
         {
             if (search != "")
             {
-                switch (Index)
+                switch (index)
                 {
                     case 0:
                         RefreshDataGridSearch(GetCode(AllParts, search));
@@ -181,10 +181,10 @@ namespace WpfApp2.ViewModel
                 RefreshDataGrid();
             }
         }
-        public void RefreshDataGridSearch(IEnumerable<Part> AllParts)
+        public void RefreshDataGridSearch(IEnumerable<Part> allParts)
         {
             ObservableListParts.Clear();
-            foreach (Part part in AllParts)
+            foreach (Part part in allParts)
             {
                 ObservableListParts.Add(part);
             }

@@ -79,9 +79,9 @@
 
             <DataGrid Name="dataGridParts" ItemsSource="{Binding ObservableListParts}" IsReadOnly="true" Height="235" Width="443" AutoGenerateColumns="False" GridLinesVisibility="All" FontSize="14" SelectionMode="Single" SelectionChanged="dataGridParts_SelectionChanged" >
                 <DataGrid.Columns>
-                    <DataGridTextColumn Width="*" Binding="{Binding codePart}" Header="Código"/>
-                    <DataGridTextColumn Width="*" Binding="{Binding descriptionPart}" Header="Descrição"/>
-                    <DataGridTextColumn Width="*" Binding="{Binding dimensionPart}" Header="Dimensão"/>
+                    <DataGridTextColumn Width="*" Binding="{Binding CodePart}" Header="Código"/>
+                    <DataGridTextColumn Width="*" Binding="{Binding DescriptionPart}" Header="Descrição"/>
+                    <DataGridTextColumn Width="*" Binding="{Binding DimensionPart}" Header="Dimensão"/>
                 </DataGrid.Columns>
             </DataGrid>
 

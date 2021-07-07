@@ -7,11 +7,11 @@ namespace WpfApp2.Model
 {
     public class Part
     {
-        public int codePart { get; set; }
-        public string descriptionPart { get; set; }
-        public decimal lengthPart { get; set; }
-        public decimal widthPart { get; set; }
-        public string dimensionPart { get; set; }
+        public int CodePart { get; set; }
+        public string DescriptionPart { get; set; }
+        public decimal LengthPart { get; set; }
+        public decimal WidthPart { get; set; }
+        public string DimensionPart { get; set; }
 
     }
 

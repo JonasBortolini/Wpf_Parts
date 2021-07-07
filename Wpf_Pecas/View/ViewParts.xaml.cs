@@ -58,10 +58,10 @@ namespace Wpf_Pecas.View
         {
             Part part = (Part)dataGridParts.SelectedItem;
             viewModelParts.EditPiece(part);
-            txbCode.Text = part.codePart.ToString();
-            txbDescription.Text = part.descriptionPart;
-            txbLength.Text = part.lengthPart.ToString();
-            txbWidth.Text = part.widthPart.ToString();
+            txbCode.Text = part.CodePart.ToString();
+            txbDescription.Text = part.DescriptionPart;
+            txbLength.Text = part.LengthPart.ToString();
+            txbWidth.Text = part.WidthPart.ToString();
             btnCancel.IsEnabled = true;
         }
         private void btnDelete_Click(object sender, RoutedEventArgs e)
@@ -76,6 +76,7 @@ namespace Wpf_Pecas.View
         private void btnSearch_Click(object sender, RoutedEventArgs e)
         {
             viewModelParts.SearchPart(cboSearch.SelectedIndex, txbSearch.Text);
+            DisableButtons();
         }
         private void btnClearFilters_Click(object sender, RoutedEventArgs e)
         {
