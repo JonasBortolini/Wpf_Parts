@@ -11,7 +11,6 @@
         <ViewParts:ViewModelParts/>
     </UserControl.DataContext>
 
-
     <Grid HorizontalAlignment="Center" VerticalAlignment="Top" >
         <StackPanel Orientation="Vertical">
             <StackPanel Orientation="Vertical" Height="214">
@@ -47,9 +46,14 @@
                     <TextBox Grid.Column="3" x:Name="txbWidth" TextWrapping="Wrap" Height="31" FontSize="16"/>
                 </Grid>
 
-                <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Margin="0 2">
-                    <Button x:Name="btnSave" Content="Salvar" Width="84" Height="31" FontSize="14" Click="btnSave_Click"/>
-                </StackPanel>
+                <Grid Margin="0 2" HorizontalAlignment="Stretch">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="350"/>
+                        <ColumnDefinition/>
+                    </Grid.ColumnDefinitions>
+                    <Button Grid.Column="0" x:Name="btnCancel" Content="Cancelar" HorizontalAlignment="Right"  VerticalAlignment="Top" Height="31" Width="84" FontSize="14" Click="btnCancel_Click"/>
+                    <Button Grid.Column="1"  x:Name="btnSave" Content="Salvar" HorizontalAlignment="Right"  VerticalAlignment="Top" Height="31" Width="84" FontSize="14" Click="btnSave_Click"/>
+                </Grid>
 
                 <Grid Margin="0 2" HorizontalAlignment="Stretch">
                     <Grid.ColumnDefinitions>
@@ -71,10 +75,9 @@
                     <Button Grid.Column="0" x:Name="btnSearch" Content="Pesquisar" HorizontalAlignment="Right"  VerticalAlignment="Top" Height="31" Width="84" FontSize="14" Click="btnSearch_Click"/>
                     <Button Grid.Column="1"  x:Name="btnClearFilters" Content="LimparFiltros" HorizontalAlignment="Right"  VerticalAlignment="Top" Height="31" Width="84" FontSize="14" Click="btnClearFilters_Click"/>
                 </Grid>
-
             </StackPanel>
 
-            <DataGrid Name="dataGridParts" ItemsSource="{Binding ObservableListParts}" IsReadOnly="true" Height="235" Width="443" AutoGenerateColumns="False" GridLinesVisibility="All" FontSize="14" SelectionMode="Single" >
+            <DataGrid Name="dataGridParts" ItemsSource="{Binding ObservableListParts}" IsReadOnly="true" Height="235" Width="443" AutoGenerateColumns="False" GridLinesVisibility="All" FontSize="14" SelectionMode="Single" SelectionChanged="dataGridParts_SelectionChanged" >
                 <DataGrid.Columns>
                     <DataGridTextColumn Width="*" Binding="{Binding codePart}" Header="Código"/>
                     <DataGridTextColumn Width="*" Binding="{Binding descriptionPart}" Header="Descrição"/>
@@ -90,7 +93,7 @@
                 <Button Grid.Column="0" x:Name="btnEdit" Content="Editar" HorizontalAlignment="Right"  VerticalAlignment="Top" Height="31" Width="84" Click="btnEdit_Click" FontSize="14"/>
                 <Button Grid.Column="1"  x:Name="btnDelete" Content="Excluir" HorizontalAlignment="Right"  VerticalAlignment="Top" Height="31" Width="84" Click="btnDelete_Click" FontSize="14"/>
             </Grid>
+            
         </StackPanel>
-
     </Grid>
 </UserControl>

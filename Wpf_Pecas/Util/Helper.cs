@@ -15,12 +15,10 @@ namespace WpfApp2.Util
         {
             return JsonConvert.SerializeObject(part);
         }
-
         public static List<Part> JsonDeserialize(string Json)
         {
             return JsonConvert.DeserializeObject<List<Part>>(Json);
         }
-
         public static void Serialize(List<Part> pecasList)
         {
             using (StreamWriter sw = new StreamWriter(@"C:\dados\arquivo.json"))
@@ -28,12 +26,11 @@ namespace WpfApp2.Util
                 sw.WriteLine(JsonSerialize(pecasList));
             }
         }
-
         public static List<Part> Deserialize()
         {
             List<Part> part;
-
             var strJson = "";
+
             try
             {
                 using (StreamReader sr = new StreamReader(@"C:\dados\arquivo.json"))
@@ -48,6 +45,5 @@ namespace WpfApp2.Util
                 return null;
             }
         }
-
     }
 }

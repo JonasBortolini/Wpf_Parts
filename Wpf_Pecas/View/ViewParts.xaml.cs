@@ -19,13 +19,12 @@ namespace Wpf_Pecas.View
     public partial class ViewParts : UserControl
     {
         private ViewModelParts viewModelParts => (ViewModelParts)this.DataContext;
-
         public ViewParts()
         {
             InitializeComponent();
             cboSearch.ItemsSource = viewModelParts.ItemCbo();
+            DisableButtons();
         }
-
         private void btnSave_Click(object sender, RoutedEventArgs e)
         {
             switch (viewModelParts.SavePart(txbCode.Text, txbDescription.Text, txbLength.Text, txbWidth.Text))
@@ -33,6 +32,7 @@ namespace Wpf_Pecas.View
                 case 0:
                     MessageBox.Show("Salvo com sucesso", "Salvar", MessageBoxButton.OK);
                     ClearTextBox();
+                    DisableButtons();
                     break;
                 case 1:
                     MessageBox.Show("Codigo invalido digite novamente", "Error", MessageBoxButton.OK);
@@ -48,35 +48,35 @@ namespace Wpf_Pecas.View
                     break;
             }
         }
+        private void DisableButtons()
+        {
+            btnCancel.IsEnabled = false;
+            btnEdit.IsEnabled = false;
+            btnDelete.IsEnabled = false;
+        }
         private void btnEdit_Click(object sender, RoutedEventArgs e)
         {
             Part part = (Part)dataGridParts.SelectedItem;
             viewModelParts.EditPiece(part);
-            if (part != null)
-            {
-                txbCode.Text = part.codePart.ToString();
-                txbDescription.Text = part.descriptionPart;
-                txbLength.Text = part.lengthPart.ToString();
-                txbWidth.Text = part.widthPart.ToString();
-            }
+            txbCode.Text = part.codePart.ToString();
+            txbDescription.Text = part.descriptionPart;
+            txbLength.Text = part.lengthPart.ToString();
+            txbWidth.Text = part.widthPart.ToString();
+            btnCancel.IsEnabled = true;
         }
         private void btnDelete_Click(object sender, RoutedEventArgs e)
         {
-            if (dataGridParts.SelectedItem != null)
+            if (MessageBox.Show("Tem certeza?", "Pergunta", MessageBoxButton.YesNo) == MessageBoxResult.Yes)
             {
-                if (MessageBox.Show("Tem certeza?", "Pergunta", MessageBoxButton.YesNo) == MessageBoxResult.Yes)
-                {
-                    viewModelParts.DeletePart((Part)dataGridParts.SelectedItem);
-                    ClearTextBox();
-                }
+                viewModelParts.DeletePart((Part)dataGridParts.SelectedItem);
+                ClearTextBox();
+                DisableButtons();
             }
         }
-
         private void btnSearch_Click(object sender, RoutedEventArgs e)
         {
             viewModelParts.SearchPart(cboSearch.SelectedIndex, txbSearch.Text);
         }
-
         private void btnClearFilters_Click(object sender, RoutedEventArgs e)
         {
             viewModelParts.RefreshDataGrid();
@@ -89,6 +89,17 @@ namespace Wpf_Pecas.View
             txbLength.Text = "";
             txbWidth.Text = "";
         }
+        private void btnCancel_Click(object sender, RoutedEventArgs e)
+        {
+            ClearTextBox();
+            btnCancel.IsEnabled = false;
+            viewModelParts.EditPiece(null);
+        }
 
+        private void dataGridParts_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            btnEdit.IsEnabled = true;
+            btnDelete.IsEnabled = true;
+        }
     }
 }

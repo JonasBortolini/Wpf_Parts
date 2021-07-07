@@ -12,23 +12,18 @@ namespace WpfApp2.ViewModel
 {
     public class ViewModelParts
     {
-        public int IndexPart = -1;
-
-        public List<Part> AllParts = new List<Part>();
         public ObservableCollection<Part> ObservableListParts { get; set; } = new ObservableCollection<Part>();
-
-
+        public int IndexPart = -1;
+        public List<Part> AllParts = new List<Part>();
         public ViewModelParts()
         {
             LoadList();
         }
-
         public string[] ItemCbo()
         {
             string[] CboSearch = { "Código", "Descrição", "Dimensão" };
             return CboSearch;
         }
-
         public int ConvertToInt(string item)
         {
             int result = 0;
@@ -54,7 +49,6 @@ namespace WpfApp2.ViewModel
                 return -1;
             }
         }
-
         public Part NewPart(string code, string description, string length, string width)
         {
             Part newPart = new Part();
@@ -117,7 +111,6 @@ namespace WpfApp2.ViewModel
                 }
             }
         }
-
         public void RefreshDataGrid()
         {
             ObservableListParts.Clear();
@@ -126,12 +119,10 @@ namespace WpfApp2.ViewModel
                 ObservableListParts.Add(part);
             }
         }
-
         public void EditPiece(Part part)
         {
             IndexPart = GetIndex(part);
         }
-
         private int GetIndex(Part part)
         {
             int index = -1;
@@ -141,14 +132,12 @@ namespace WpfApp2.ViewModel
             }
             return index;
         }
-
         public void DeletePart(Part part)
         {
             AllParts.RemoveAt(GetIndex(part));
             Helper.Serialize(AllParts);
             RefreshDataGrid();
         }
-
         private IEnumerable<Part> GetCode(List<Part> listPart, string search)
         {
             IEnumerable<Part> result = from part in listPart
@@ -170,7 +159,6 @@ namespace WpfApp2.ViewModel
                                        select part;
             return result;
         }
-
         public void SearchPart(int Index, string search)
         {
             if (search != "")
@@ -188,12 +176,11 @@ namespace WpfApp2.ViewModel
                         break;
                 }
             }
-            else 
+            else
             {
                 RefreshDataGrid();
             }
         }
-
         public void RefreshDataGridSearch(IEnumerable<Part> AllParts)
         {
             ObservableListParts.Clear();
