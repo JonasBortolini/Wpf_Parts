@@ -104,15 +104,12 @@ namespace WpfApp2.ViewModel
             if (Helper.Deserialize() != null)
             {
                 AllParts = Helper.Deserialize();
-
-                foreach (Part part in AllParts)
-                {
-                    ObservableListParts.Add(part);
-                }
+                RefreshDataGrid();
             }
         }
         public void RefreshDataGrid()
         {
+            AllParts = AllParts.OrderBy(x => x.CodePart).ToList();
             ObservableListParts.Clear();
             foreach (Part part in AllParts)
             {
